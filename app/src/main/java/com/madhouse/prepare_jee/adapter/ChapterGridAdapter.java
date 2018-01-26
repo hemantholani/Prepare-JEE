@@ -83,7 +83,7 @@ public class ChapterGridAdapter extends BaseAdapter {
             if (subject.equals("physics")) {
                 linearLayout.setBackgroundResource(R.drawable.ripple_physics_grid);
             } else if (subject.equals("maths")) {
-                linearLayout.setBackgroundResource(R.drawable.ripple_biology_grid);
+                linearLayout.setBackgroundResource(R.drawable.ripple_maths_grid);
             } else {
                 linearLayout.setBackgroundResource(R.drawable.ripple_chem_grid);
             }

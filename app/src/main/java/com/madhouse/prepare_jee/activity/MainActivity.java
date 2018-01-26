@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         chemChps = findViewById(R.id.txt_chem_chp);
         physics = findViewById(R.id.physics_layout);
         chem = findViewById(R.id.chem_layout);
-        bio = findViewById(R.id.biology_layout);
+        bio = findViewById(R.id.maths_layout);
         poppins = Typeface.createFromAsset(getAssets(), "fonts/poppins.ttf");
         poppins_light = Typeface.createFromAsset(getAssets(), "fonts/poppins_light.ttf");
         poppins_bold = Typeface.createFromAsset(getAssets(), "fonts/poppins_bold.ttf");

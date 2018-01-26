@@ -7,12 +7,12 @@
     <color name="blue">#3f51B5</color>
 
     <color name="primary_physics">#3498db</color>
-    <color name="primary_maths">#383838</color>
+    <color name="primary_maths">#27ae60</color>
     <color name="primary_chemistry">#9b59b6</color>
 
     <!-- Use these to make homepage tiles -->
     <color name="physics_overlay">#8D3498db</color>
-    <color name="maths_overlay">#6D383838</color>
+    <color name="maths_overlay">#6D27ae60</color>
     <color name="chem_overlay">#8D9b59b6</color>
 
 
