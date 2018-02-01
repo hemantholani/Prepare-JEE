@@ -2,30 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/chapterTitle"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/material_black"
-        android:textSize="16sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/subjectTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:background="@color/primary_maths"
-        android:gravity="center"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/chapterTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/material_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/subjectTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@color/primary_maths"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_black"
+        android:paddingBottom="2dp" />
+
 </LinearLayout>
