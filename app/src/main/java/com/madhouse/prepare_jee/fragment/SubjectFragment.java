@@ -88,11 +88,11 @@ public class SubjectFragment extends Fragment {
         gridView = rootView.findViewById(R.id.subject_grid);
         progressBar = rootView.findViewById(R.id.subject_progress_bar);
         if (subject.equals("physics")) {
-            progressBar.setBackgroundTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_physics)));
+            progressBar.setIndeterminateTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_physics)));
         } else if (subject.equals("maths")) {
-            progressBar.setBackgroundTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_maths)));
+            progressBar.setIndeterminateTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_maths)));
         } else if (subject.equals("chemistry")) {
-            progressBar.setBackgroundTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_chemistry)));
+            progressBar.setIndeterminateTintList(ColorStateList.valueOf(getActivity().getResources().getColor(R.color.primary_chemistry)));
         }
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(subject + "_chapters");
@@ -127,44 +127,6 @@ public class SubjectFragment extends Fragment {
         });
         chapterGridAdapter = new ChapterGridAdapter(getActivity(), chapterList, subject);
         gridView.setAdapter(chapterGridAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                Log.d(TAG, "onItemClick: ");
-                final String chapterName = chapterList.get(i);
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference(subject + "_detailed_chapters/" + chapterList.get(i).replace(" ", ""));
-                databaseReference.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Log.d(TAG, "onChildAdded: " + dataSnapshot);
-                        String fileURL = dataSnapshot.getValue(String.class);
-                        Log.d(TAG, "onChildAdded: " + fileURL);
-                        displayPDF(fileURL, chapterName);
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
         EditText chapterSearch = toolbar.findViewById(R.id.txtSearch);
         chapterSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -189,86 +151,6 @@ public class SubjectFragment extends Fragment {
         return rootView;
     }
 
-    private void displayPDF(String fileURL, String fileName) {
-        Log.d(TAG, "displayPDF: " + fileURL);
-        new DownloadFile().execute(fileURL, fileName);
-    }
-
-    private class DownloadFile extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];
-            String fileName = strings[1];
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    progressDialogAdapter = new ProgressDialogAdapter(getActivity());
-                    progressDialogAdapter.showDialog();
-                }
-            });
-            pdfFile = new File(getContext().getFilesDir(), fileName.toLowerCase().replace(" ", "").replace("'", ""));
-            try {
-                pdfFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-           /* try {
-                if (fileUrl != null) {
-                    URL url = new URL(fileUrl);
-                    Log.d(TAG, "doInBackground: file" + fileUrl);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setRequestMethod("GET");
-                    urlConnection.setDoOutput(true);
-                    urlConnection.connect();
-
-                    InputStream inputStream = urlConnection.getInputStream();
-                    FileOutputStream fileOutputStream = getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
-                    int totalSize = urlConnection.getContentLength();
-                    Log.d(TAG, "doInBackground: " + totalSize);
-                    byte[] buffer = new byte[1024 * 1024];
-                    int bufferLength;
-                    while ((bufferLength = inputStream.read(buffer)) > 0) {
-                        fileOutputStream.write(buffer, 0, bufferLength);
-                    }
-                    fileOutputStream.close();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            StorageReference islandRef = FirebaseStorage.getInstance().getReferenceFromUrl(fileUrl);
-            Log.d(TAG, "doInBackground: " + islandRef);
-            Log.d(TAG, "onSuccess: " + pdfFile.length());
-            islandRef.getFile(pdfFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.d(TAG, "onSuccess: " + pdfFile.length());
-
-                    FolioReader folioReader = new FolioReader(getActivity());
-                    Log.d(TAG, "doInBackground: " + pdfFile.getAbsolutePath());
-                    folioReader.openBook(pdfFile.getAbsolutePath());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialogAdapter.hideDialog();
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }                    // Handle any errors
-
-            });
-
-
-            return null;
-        }
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void circleReveal(int viewID, int posFromRight, boolean containsOverflow, final boolean isShow) {

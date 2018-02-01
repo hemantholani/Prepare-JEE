@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.folioreader.util.FolioReader;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +31,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.madhouse.prepare_jee.R;
+import com.madhouse.prepare_jee.activity.SubActivity;
+import com.madhouse.prepare_jee.fragment.ChapterFragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +60,7 @@ public class ChapterGridAdapter extends BaseAdapter {
         if (searchList == null) {
             searchList = new ArrayList<>(chapterList);
         }
-//        poppins_bold = Typeface.createFromAsset(context.getAssets(), "fonts/poppins_bold.ttf");
+        poppins_bold = Typeface.createFromAsset(context.getAssets(), "fonts/poppins_bold.ttf");
     }
 
     @Override
@@ -91,7 +96,7 @@ public class ChapterGridAdapter extends BaseAdapter {
             textView.setText(chapterList.get(i).toUpperCase());
             Log.d(TAG, "getView: " + chapterList);
             Log.d(TAG, "getView: " + chapterList.get(i));
-            //textView.setTypeface(poppins_bold);
+            textView.setTypeface(poppins_bold);
             SharedPreferences sharedPreferences = context.getSharedPreferences("Bookmarks", 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Gson gson = new Gson();
@@ -168,11 +173,13 @@ public class ChapterGridAdapter extends BaseAdapter {
                         subjectList.remove(bookmaksList.indexOf(chapterName));
                         bookmaksList.remove(chapterName);
                         ImageButton imageButton1 = (ImageButton) view;
+                        Toast.makeText(context, "Bookmark removed", Toast.LENGTH_SHORT).show();
                         imageButton1.setImageDrawable(context.getResources().getDrawable(R.drawable.bookmark_white_border));
                     } else {
                         bookmaksList.add(chapterName);
                         subjectList.add(subject);
                         ImageButton imageButton1 = (ImageButton) view;
+                        Toast.makeText(context, "Bookmark added", Toast.LENGTH_SHORT).show();
                         imageButton1.setImageDrawable(context.getResources().getDrawable(R.drawable.bookmark_white));
                     }
                     editor.putString("bookmarksList", gson.toJson(bookmaksList));
@@ -192,55 +199,19 @@ public class ChapterGridAdapter extends BaseAdapter {
 
     private void displayPDF(String fileURL, String fileName) {
         Log.d(TAG, "displayPDF: " + fileURL);
-        new DownloadFile().execute(fileURL, fileName);
+        Bundle bundle = new Bundle();
+        bundle.putString("FileName", fileName);
+        bundle.putString("FileURL", fileURL);
+        ChapterFragment chapterFragment = new ChapterFragment();
+        chapterFragment.setArguments(bundle);
+        FragmentManager fragmentManager =
+                ((SubActivity) context).getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, chapterFragment)
+                .commit();
     }
 
-    private class DownloadFile extends AsyncTask<String, Void, Void> {
 
-        @Override
-        protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];
-            String fileName = strings[1];
-            ((Activity) context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    progressDialogAdapter = new ProgressDialogAdapter(context);
-                    progressDialogAdapter.showDialog();
-                }
-            });
-            pdfFile = new File(context.getFilesDir(), fileName);
-            try {
-                pdfFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            StorageReference islandRef = FirebaseStorage.getInstance().getReferenceFromUrl(fileUrl);
-            Log.d(TAG, "doInBackground: " + islandRef);
-            Log.d(TAG, "onSuccess: " + pdfFile.length());
-            islandRef.getFile(pdfFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.d(TAG, "onSuccess: " + pdfFile.length());
-
-                    FolioReader folioReader = new FolioReader(context);
-                    Log.d(TAG, "doInBackground: " + pdfFile.getAbsolutePath());
-                    folioReader.openBook(pdfFile.getAbsolutePath());
-                    ((Activity) context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialogAdapter.hideDialog();
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }                    // Handle any errors
-
-            });
-            return null;
-
-        }
-    }
 }
 

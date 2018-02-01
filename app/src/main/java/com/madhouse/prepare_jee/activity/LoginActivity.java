@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         //GoogleSignIn Start
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("620207220278-k7p01lov9u8uoi62ru0hlbgbco40ceq9.apps.googleusercontent.com")
+                .requestIdToken("472535752159-2q1ej6t1ki50shjcc4hqkpho29ovoada.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);

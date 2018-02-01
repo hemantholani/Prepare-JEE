@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 intent.putExtra("Subject", "physics");
                 intent.putExtra("Color", R.color.primary_physics);
+                intent.putExtra("Activity","Main");
                 startActivity(intent);
                 //overridePendingTransition(R.anim.enter_subject, R.anim.exit_subject);
             }
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 intent.putExtra("Subject", "maths");
                 intent.putExtra("Color", R.color.primary_maths);
-                intent.putExtra("BookmarkCheck", false);
+                intent.putExtra("Activity","Main");
                 startActivity(intent);
                 //overridePendingTransition(R.anim.enter_subject, R.anim.exit_subject);
             }
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 intent.putExtra("Subject", "chemistry");
+                intent.putExtra("Activity","Main");
                 intent.putExtra("Color", R.color.primary_chemistry);
                 startActivity(intent);
                 //overridePendingTransition(R.anim.enter_subject, R.anim.exit_subject);

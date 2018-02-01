@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left|start"
             android:background="#E3E3E3"
+            android:groupIndicator="@drawable/group_selector"
             android:divider="@color/material_black"
             android:dividerHeight="0dp"
             android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />

@@ -10,6 +10,7 @@
         android:id="@+id/expandedListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#E3E3E3"
         android:paddingBottom="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingRight="?android:attr/expandableListPreferredChildPaddingLeft"

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "620207220278",
-    "firebase_url": "https://prepare-2b69d.firebaseio.com",
-    "project_id": "prepare-2b69d",
-    "storage_bucket": "prepare-2b69d.appspot.com"
+    "project_number": "472535752159",
+    "firebase_url": "https://prepare-f7afb.firebaseio.com",
+    "project_id": "prepare-f7afb",
+    "storage_bucket": "prepare-f7afb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:620207220278:android:3bd1e1d82b38cb56",
+        "mobilesdk_app_id": "1:472535752159:android:3bd1e1d82b38cb56",
         "android_client_info": {
           "package_name": "com.madhouseapps.prepare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "620207220278-c53qccnigtsojred34t1r8bq1931jgp2.apps.googleusercontent.com",
+          "client_id": "472535752159-lgggedoa6kpaeun3ml2kkrach7u6onif.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.madhouseapps.prepare",
-            "certificate_hash": "65a3ea0a494c16add0b88d2bec909dcfb39882da"
+            "certificate_hash": "b1062544e6678335366ced43e8f66dee1df16b03"
           }
         },
         {
-          "client_id": "620207220278-k7p01lov9u8uoi62ru0hlbgbco40ceq9.apps.googleusercontent.com",
+          "client_id": "472535752159-2q1ej6t1ki50shjcc4hqkpho29ovoada.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPSoPoVtrW7FTW1Kkmc6H6Dz91_vTnu74"
+          "current_key": "AIzaSyBGr052wUhpywhdAYbxWliMeIxesQ7hvvY"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "620207220278-k7p01lov9u8uoi62ru0hlbgbco40ceq9.apps.googleusercontent.com",
+              "client_id": "472535752159-2q1ej6t1ki50shjcc4hqkpho29ovoada.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -52,28 +52,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:620207220278:android:f831fdb67203fea0",
+        "mobilesdk_app_id": "1:472535752159:android:f831fdb67203fea0",
         "android_client_info": {
           "package_name": "com.madhouse.prepare_jee"
         }
       },
       "oauth_client": [
         {
-          "client_id": "620207220278-p9mfvnj3tcjahmeg81rgd5qv1vgaaag1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.madhouse.prepare_jee",
-            "certificate_hash": "65a3ea0a494c16add0b88d2bec909dcfb39882da"
-          }
-        },
-        {
-          "client_id": "620207220278-k7p01lov9u8uoi62ru0hlbgbco40ceq9.apps.googleusercontent.com",
+          "client_id": "472535752159-2q1ej6t1ki50shjcc4hqkpho29ovoada.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPSoPoVtrW7FTW1Kkmc6H6Dz91_vTnu74"
+          "current_key": "AIzaSyBGr052wUhpywhdAYbxWliMeIxesQ7hvvY"
         }
       ],
       "services": {
@@ -81,13 +73,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "620207220278-k7p01lov9u8uoi62ru0hlbgbco40ceq9.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

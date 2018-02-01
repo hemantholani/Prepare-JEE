@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingBottom="10dp"
+        android:background="#E3E3E3"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
         android:textColor="#383838" />

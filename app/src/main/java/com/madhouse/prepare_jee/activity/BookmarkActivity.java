@@ -37,6 +37,7 @@ public class BookmarkActivity extends AppCompatActivity {
     private List<String> subjectList = new ArrayList<>();
     private static final String TAG = "BookmarkActivity";
     private File pdfFile;
+    private String subject;
     private ProgressDialogAdapter progressDialogAdapter;
 
     @Override
@@ -59,6 +60,7 @@ public class BookmarkActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     final String chapterName = bookmaksList.get(i);
+                    subject = subjectList.get(i);
                     DatabaseReference databaseReference = firebaseDatabase.getReference(subjectList.get(i) + "_detailed_chapters/" + bookmaksList.get(i).replace(" ", ""));
                     databaseReference.addChildEventListener(new ChildEventListener() {
                         @Override
@@ -66,7 +68,7 @@ public class BookmarkActivity extends AppCompatActivity {
                             Log.d(TAG, "onChildAdded: " + dataSnapshot);
                             String fileURL = dataSnapshot.getValue(String.class);
                             Log.d(TAG, "onChildAdded: " + fileURL);
-                            displayPDF(fileURL, chapterName);
+                            displayPDF(fileURL, chapterName,subject);
                         }
 
                         @Override
@@ -94,10 +96,16 @@ public class BookmarkActivity extends AppCompatActivity {
         }
     }
 
-    private void displayPDF(String fileURL, String fileName) {
+    private void displayPDF(String fileURL, String fileName, String subject) {
         Log.d(TAG, "displayPDF: " + fileURL);
-        new DownloadFile().execute(fileURL, fileName);
+        Intent intent = new Intent(BookmarkActivity.this, SubActivity.class);
+        intent.putExtra("Activity", "Bookmarks");
+        intent.putExtra("fileName", fileName);
+        intent.putExtra("fileURL", fileURL);
+        intent.putExtra("Subject",subject);
+        startActivity(intent);
     }
+
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
 
